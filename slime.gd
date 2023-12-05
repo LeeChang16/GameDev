@@ -1,11 +1,22 @@
 extends Node2D
 
+var speed = 100  # Adjust the speed as needed
+var direction = Vector2.LEFT
+var change_direction_timer = 2.0  # Adjust the time interval for changing direction
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@onready var animation = get_node("CharacterBody2D/CollisionShape2D/AnimatedSprite2D")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	# Move the slime
+	var velocity = direction * speed * delta
+	position += velocity
+
+	# Update the timer
+	change_direction_timer -= delta
+
+	# Change direction when the timer reaches zero
+	if change_direction_timer <= 0:
+		direction = -direction
+		animation.play("slime_move")
+		animation.scale.x *= -1  # Flip the sprite to match the new direction
+		change_direction_timer = 2.0  # Reset the timer

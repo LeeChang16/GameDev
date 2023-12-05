@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://fh4rmh44n0g8"]
+
+[ext_resource type="Texture2D" uid="uid://c2w42c2hhmcqk" path="res://image resources/chest_closed.png" id="1_kwiw5"]
+[ext_resource type="Script" path="res://chest.gd" id="1_s7ahc"]
+[ext_resource type="Texture2D" uid="uid://ptcqtvl2ajgd" path="res://image resources/chest_open.png" id="2_vib36"]
+[ext_resource type="Texture2D" uid="uid://c1nkr24m51aai" path="res://image resources/Shard_diamond.png" id="4_krey5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlxsa"]
+size = Vector2(29, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7w2ty"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kwiw5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vib36")
+}],
+"loop": false,
+"name": &"chest",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_50fql"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_krey5")
+}],
+"loop": true,
+"name": &"shard",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w54l3"]
+size = Vector2(31, 19)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_s7ahc")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(5.5, 1.5)
+shape = SubResource("RectangleShape2D_dlxsa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/CollisionShape2D"]
+position = Vector2(-1, -6)
+scale = Vector2(2.25, 2.125)
+sprite_frames = SubResource("SpriteFrames_7w2ty")
+animation = &"chest"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CharacterBody2D/CollisionShape2D"]
+sprite_frames = SubResource("SpriteFrames_50fql")
+animation = &"shard"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(5.5, 1.5)
+shape = SubResource("RectangleShape2D_w54l3")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
