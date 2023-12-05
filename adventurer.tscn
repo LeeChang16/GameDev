@@ -1,6 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://bculnifb24bap"]
+[gd_scene load_steps=39 format=3 uid="uid://bculnifb24bap"]
 
 [ext_resource type="Texture2D" uid="uid://cq5u2dluyl3m" path="res://sprites/adventurer/die/adventurer-knock-dwn-00.png" id="1_5s4d2"]
+[ext_resource type="Script" path="res://adventurer.gd" id="1_twgbt"]
 [ext_resource type="Texture2D" uid="uid://uoymq7w3sts5" path="res://sprites/adventurer/die/adventurer-knock-dwn-01.png" id="2_pqtvd"]
 [ext_resource type="Texture2D" uid="uid://debtwc41qshlp" path="res://sprites/adventurer/die/adventurer-knock-dwn-02.png" id="3_b5cjg"]
 [ext_resource type="Texture2D" uid="uid://c1fdegkrrhhgt" path="res://sprites/adventurer/die/adventurer-knock-dwn-03.png" id="4_m4h7t"]
@@ -37,7 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://dlt2uoru5nakt" path="res://sprites/adventurer/run-wall/adventurer-wall-run-05.png" id="35_ijah4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwadf"]
-size = Vector2(88, 141.5)
+size = Vector2(36, 59.5)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_puj4f"]
 animations = [{
@@ -183,16 +184,17 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_twgbt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8.75)
+position = Vector2(-1, 2.75)
 shape = SubResource("RectangleShape2D_mwadf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
-position = Vector2(8, -25.75)
-scale = Vector2(4.035, 5.49662)
+position = Vector2(-1, -11)
+scale = Vector2(2, 2.35135)
 sprite_frames = SubResource("SpriteFrames_puj4f")
-animation = &"run_punch"
+animation = &"jump"
 
 [node name="Camera2D" type="Camera2D" parent="CollisionShape2D/AnimatedSprite2D"]
 position = Vector2(-0.774476, 3.03596)
