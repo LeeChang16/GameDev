@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://cemggw6xnf5ep"]
+
+[ext_resource type="Script" path="res://frog.gd" id="1_nk6w7"]
+[ext_resource type="Texture2D" uid="uid://o8bob4c4cc1a" path="res://sprites/Enemy_other/frog-jump.png" id="1_trttr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2wwl"]
+radius = 7.07107
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nb17"]
+atlas = ExtResource("1_trttr")
+region = Rect2(0, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unaw7"]
+atlas = ExtResource("1_trttr")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c333j"]
+atlas = ExtResource("1_trttr")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sq6kc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nb17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unaw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c333j")
+}],
+"loop": true,
+"name": &"frog_jump",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h6dr1"]
+radius = 10.0499
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_nk6w7")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_s2wwl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/CollisionShape2D"]
+sprite_frames = SubResource("SpriteFrames_sq6kc")
+animation = &"frog_jump"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_h6dr1")

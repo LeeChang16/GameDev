@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://fh4rmh44n0g8"]
+[gd_scene load_steps=19 format=3 uid="uid://fh4rmh44n0g8"]
 
 [ext_resource type="Texture2D" uid="uid://c2w42c2hhmcqk" path="res://image resources/chest_closed.png" id="1_kwiw5"]
 [ext_resource type="Script" path="res://chest.gd" id="1_s7ahc"]
 [ext_resource type="Texture2D" uid="uid://ptcqtvl2ajgd" path="res://image resources/chest_open.png" id="2_vib36"]
 [ext_resource type="Texture2D" uid="uid://c1nkr24m51aai" path="res://image resources/Shard_diamond.png" id="4_krey5"]
+[ext_resource type="Texture2D" uid="uid://cg3ketpiq3oi" path="res://image resources/shard.png" id="5_k4b33"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlxsa"]
 size = Vector2(29, 19)
@@ -22,6 +23,42 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_go70x"]
+atlas = ExtResource("5_k4b33")
+region = Rect2(0, 0, 456, 488)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwmym"]
+atlas = ExtResource("5_k4b33")
+region = Rect2(456, 0, 456, 488)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe6ve"]
+atlas = ExtResource("5_k4b33")
+region = Rect2(912, 0, 456, 488)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r24ls"]
+atlas = ExtResource("5_k4b33")
+region = Rect2(0, 488, 456, 488)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j76rx"]
+atlas = ExtResource("5_k4b33")
+region = Rect2(456, 488, 456, 488)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdwu8"]
+atlas = ExtResource("5_k4b33")
+region = Rect2(912, 488, 456, 488)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11hwx"]
+atlas = ExtResource("5_k4b33")
+region = Rect2(0, 976, 456, 488)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k2im"]
+atlas = ExtResource("5_k4b33")
+region = Rect2(456, 976, 456, 488)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kenw4"]
+atlas = ExtResource("5_k4b33")
+region = Rect2(912, 976, 456, 488)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_50fql"]
 animations = [{
 "frames": [{
@@ -31,10 +68,42 @@ animations = [{
 "loop": true,
 "name": &"shard",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_go70x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwmym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe6ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r24ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j76rx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdwu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11hwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k2im")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kenw4")
+}],
+"loop": false,
+"name": &"sharrd",
+"speed": 9.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w54l3"]
-size = Vector2(31, 19)
+size = Vector2(43.75, 27.25)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_s7ahc")
@@ -42,23 +111,25 @@ script = ExtResource("1_s7ahc")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(5.5, 1.5)
+position = Vector2(-4, -972)
 shape = SubResource("RectangleShape2D_dlxsa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/CollisionShape2D"]
-position = Vector2(-1, -6)
-scale = Vector2(2.25, 2.125)
+position = Vector2(14.75, 952.259)
+scale = Vector2(3.03125, 3.59259)
 sprite_frames = SubResource("SpriteFrames_7w2ty")
 animation = &"chest"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CharacterBody2D/CollisionShape2D"]
+position = Vector2(-2, 955)
+scale = Vector2(0.119518, 0.0930669)
 sprite_frames = SubResource("SpriteFrames_50fql")
-animation = &"shard"
+animation = &"sharrd"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(5.5, 1.5)
+position = Vector2(8.875, -9.625)
 shape = SubResource("RectangleShape2D_w54l3")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

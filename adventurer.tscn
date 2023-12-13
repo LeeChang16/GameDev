@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bculnifb24bap"]
+[gd_scene load_steps=46 format=3 uid="uid://bculnifb24bap"]
 
 [ext_resource type="Texture2D" uid="uid://cq5u2dluyl3m" path="res://sprites/adventurer/die/adventurer-knock-dwn-00.png" id="1_5s4d2"]
 [ext_resource type="Script" path="res://adventurer.gd" id="1_twgbt"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://l7p1rw6uqu2h" path="res://sprites/adventurer/jump/adventurer-jump-02.png" id="15_xk4gq"]
 [ext_resource type="Texture2D" uid="uid://cviw8kv87bayk" path="res://sprites/adventurer/jump/adventurer-jump-03.png" id="16_co447"]
 [ext_resource type="Texture2D" uid="uid://c6p70qws1iqip" path="res://sprites/adventurer/run/adventurer-run3-00.png" id="17_iiyf8"]
+[ext_resource type="Texture2D" uid="uid://cgys1mhpesqr6" path="res://sprites/adventurer-v1.5-Sheet.png" id="18_aoapt"]
 [ext_resource type="Texture2D" uid="uid://dco4hr5kqs7db" path="res://sprites/adventurer/run/adventurer-run3-01.png" id="18_icl44"]
 [ext_resource type="Texture2D" uid="uid://fgogifxjqbl0" path="res://sprites/adventurer/run/adventurer-run3-02.png" id="19_wujru"]
 [ext_resource type="Texture2D" uid="uid://do2b7uxxhgbfn" path="res://sprites/adventurer/run/adventurer-run3-03.png" id="20_7ptc1"]
@@ -38,7 +39,31 @@
 [ext_resource type="Texture2D" uid="uid://dlt2uoru5nakt" path="res://sprites/adventurer/run-wall/adventurer-wall-run-05.png" id="35_ijah4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwadf"]
-size = Vector2(30, 45)
+size = Vector2(30, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opxkg"]
+atlas = ExtResource("18_aoapt")
+region = Rect2(200, 74, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arr2s"]
+atlas = ExtResource("18_aoapt")
+region = Rect2(250, 74, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwhgq"]
+atlas = ExtResource("18_aoapt")
+region = Rect2(300, 74, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_574ts"]
+atlas = ExtResource("18_aoapt")
+region = Rect2(0, 111, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwajf"]
+atlas = ExtResource("18_aoapt")
+region = Rect2(50, 111, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br7dq"]
+atlas = ExtResource("18_aoapt")
+region = Rect2(100, 111, 50, 37)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_puj4f"]
 animations = [{
@@ -106,8 +131,66 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("16_co447")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_xk4gq")
+}],
+"loop": true,
+"name": &"jump_air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opxkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arr2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwhgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_574ts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwajf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br7dq")
+}],
+"loop": false,
+"name": &"jump_double",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_co447")
+}],
+"loop": false,
+"name": &"jump_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_co447")
+}],
+"loop": false,
+"name": &"jump_land",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_1cmkk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_cqe6e")
+}],
+"loop": false,
+"name": &"jump_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -188,14 +271,21 @@ script = ExtResource("1_twgbt")
 metadata/_edit_horizontal_guides_ = [-55.0, -55.0, -55.0, -55.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 2.5)
+position = Vector2(-4, -2.5)
 shape = SubResource("RectangleShape2D_mwadf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
-position = Vector2(-1, -10.5)
-scale = Vector2(1.51416, 1.83446)
+position = Vector2(2, -11.5)
+scale = Vector2(1.71854, 2.22889)
 sprite_frames = SubResource("SpriteFrames_puj4f")
-animation = &"jump"
+animation = &"die"
 
 [node name="Camera2D" type="Camera2D" parent="CollisionShape2D/AnimatedSprite2D"]
 position = Vector2(-0.774476, 3.03596)
+limit_left = 0
+limit_top = 0
+limit_right = 5190
+limit_bottom = 650
+editor_draw_limits = true
+
+[connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

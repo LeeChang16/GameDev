@@ -21,5 +21,5 @@ func _on_area_2d_body_entered(body):
 		
 		# Show and play coin animation
 		shardanimation.show()
-		shardanimation.play('shard')
+		shardanimation.play('sharrd')
 	pass # Replace with function body.
