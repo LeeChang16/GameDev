@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbk6pi2f065xw"]
+[gd_scene load_steps=25 format=3 uid="uid://dbk6pi2f065xw"]
 
 [ext_resource type="Script" path="res://slime.gd" id="1_bjxvw"]
 [ext_resource type="Texture2D" uid="uid://gqlj4g8ynmn2" path="res://sprites/Slime/Slime Attack/slime-attack-0.png" id="1_xx11p"]
@@ -22,9 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://d0wg103pnk0a3" path="res://sprites/Slime/Slime Move/slime-move-1.png" id="19_37qsf"]
 [ext_resource type="Texture2D" uid="uid://cjmhtqdmavvsj" path="res://sprites/Slime/Slime Move/slime-move-2.png" id="20_fu1le"]
 [ext_resource type="Texture2D" uid="uid://jwkv421vjvii" path="res://sprites/Slime/Slime Move/slime-move-3.png" id="21_apxax"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_pa7dl"]
-radius = 17.0294
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xncx6"]
 animations = [{
@@ -118,17 +115,14 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ngm6n"]
-radius = 28.0179
+radius = 208.195
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_bjxvw")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("CircleShape2D_pa7dl")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/CollisionShape2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 position = Vector2(2, -11)
 scale = Vector2(1.25, 1.82)
 sprite_frames = SubResource("SpriteFrames_xncx6")

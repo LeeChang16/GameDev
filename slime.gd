@@ -1,40 +1,64 @@
 extends Node2D
 
-var speed = 100
-var direction = Vector2.LEFT
-var change_direction_timer = 2.0
+var speed = 200
+var direction = Vector2.ZERO  # Initially set to zero for idle state
+# var follow_range = 350  # Adjust the range based on your needs
+var gravity = 500  # Adjust the gravity strength based on your needs
 
-@onready var animation = $CharacterBody2D/CollisionShape2D/AnimatedSprite2D
+@onready var animation = $CharacterBody2D/AnimatedSprite2D
+
+const SLIME_DAMAGE_AMOUNT = 10
 var is_player_inside = false
 
 func _process(delta):
+	# Check if the adventurer node is inside the slime's detection area
 	if is_player_inside:
-		# Stop moving and play attack animation when the player is inside the area
-		direction = Vector2.ZERO
-		animation.play("slime_attack")
+		# Get a reference to the adventurer node
+		var adventurer = get_node("/root/Node2D/StaticBody2D/adventurer")  # Adjust the path accordingly
+		# Move towards the player when inside the follow range
+		direction = adventurer.position - position 
+		direction = direction.normalized()
+		# Disregard vertical movement
+		direction.y = 0
+		# Play the follow animation
+		animation.play("slime_move")
+
+		# Check if the player is on the ground before updating the slime's position
+		if adventurer.is_on_floor():
+			# Move the slime based on the direction
+			var velocity = direction * speed * delta
+			position.x += velocity.x  # Only update the horizontal position
+
+			# Flip the sprite based on the movement direction
+			if direction.x > 0:
+				animation.scale.x = abs(animation.scale.x) * -1  # Flip horizontally
+			elif direction.x < 0:
+				animation.scale.x = abs(animation.scale.x)  # Reset to original scale
 	else:
-		# Move the slime when the player is outside the area
-		var velocity = direction * speed * delta
-		position += velocity
-
-		# Update the timer
-		change_direction_timer -= delta
-
-		# Change direction when the timer reaches zero
-		if change_direction_timer <= 0:
-			direction = -direction
-			animation.play("slime_move")
-			animation.scale.x *= -1  # Flip the sprite to match the new direction
-			change_direction_timer = 2.0  # Reset the timer
+		# Handle the case where the player is outside the follow range
+		direction = Vector2.ZERO
+		animation.play("slime_idle")
+	
+		# Reset the sprite scale when idle
+		animation.scale.x = abs(animation.scale.x)
 
 func _on_area_2d_body_entered(body):
-	if body.is_in_group("adventurer"):
+	if body.name =="adventurer":
 		is_player_inside = true
 
 func _on_area_2d_body_exited(body):
-	if body.is_in_group("adventurer"):
+	if body.name == "adventurer":
 		is_player_inside = false
-		# Reset the direction and resume moving when the player exits the area
-		direction = Vector2.LEFT
-		change_direction_timer = 2.0
-		animation.play("slime_move")
+
+
+func _on_attack_hero_body_entered(body):
+	
+	# Get a reference to the adventurer node
+	var adventurer = get_node("/root/Node2D/StaticBody2D/adventurer")  # Adjust the path accordingly
+		
+	# Call the take_damage function in the adventurer script
+	adventurer.take_damage(SLIME_DAMAGE_AMOUNT)
+		
+	# Add logic for playing the attack animation if needed
+	animation.play("slime_attack")
+
