@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
-
+class_name adventurer
 
 #commnet  
 var SPEED = 300.0
 var JUMP_VELOCITY = -580.0
+
+#Double Jump
 var prevX=0
 var prevY=0
 var has_double_jump=false
@@ -14,6 +16,11 @@ var was_in_air= false
 var facing_right=true
 var new_game=false;
 
+#Health Bar
+@export var maxHealth = 100
+@onready var currentHealth: int = maxHealth
+
+signal healthChanged
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -117,10 +124,6 @@ func land():
 	anim.play("jump_land")
 	velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	
-	
-
-
 
 func _on_animated_sprite_2d_animation_finished():
 #	print("anim",anim.animation)
@@ -136,3 +139,23 @@ func _on_animated_sprite_2d_animation_finished():
 	if(anim.animation=="jump_land"):
 		animation_locked=false
 		print("jump_land")
+
+
+# Function to handle the player taking damage
+func take_damage(amount: int):
+	currentHealth -= amount
+
+	# Ensure health doesn't go below zero
+	currentHealth = max(0, currentHealth)
+
+	# Emit the healthChanged signal with the updated health values
+	emit_signal("healthChanged", currentHealth, maxHealth)
+
+	# Add logic to handle player death if needed
+	if currentHealth == 0:
+		on_player_death()
+
+# Add any additional logic for player death here
+func on_player_death():
+	# For example, reload the scene or show a game over screen
+	pass
