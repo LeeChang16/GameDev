@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://fh4rmh44n0g8"]
+[gd_scene load_steps=21 format=3 uid="uid://fh4rmh44n0g8"]
 
 [ext_resource type="Texture2D" uid="uid://c2w42c2hhmcqk" path="res://image resources/chest_closed.png" id="1_kwiw5"]
 [ext_resource type="Script" path="res://chest.gd" id="1_s7ahc"]
 [ext_resource type="Texture2D" uid="uid://ptcqtvl2ajgd" path="res://image resources/chest_open.png" id="2_vib36"]
 [ext_resource type="Texture2D" uid="uid://c1nkr24m51aai" path="res://image resources/Shard_diamond.png" id="4_krey5"]
 [ext_resource type="Texture2D" uid="uid://cg3ketpiq3oi" path="res://image resources/shard.png" id="5_k4b33"]
+[ext_resource type="AudioStream" uid="uid://lfsdo5xsc2es" path="res://Music/Magic/Magic1.wav" id="6_s3x2k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlxsa"]
 size = Vector2(29, 19)
@@ -135,6 +136,9 @@ animation = &"sharrd"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/CollisionShape2D/AnimatedSprite2D2/collect_shard"]
 position = Vector2(-150.605, 79.8821)
 shape = SubResource("CapsuleShape2D_ff2d1")
+
+[node name="Collect_audio" type="AudioStreamPlayer2D" parent="CharacterBody2D/CollisionShape2D/AnimatedSprite2D2"]
+stream = ExtResource("6_s3x2k")
 
 [node name="Area2D" type="Area2D" parent="."]
 

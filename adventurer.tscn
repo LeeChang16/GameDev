@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bculnifb24bap"]
+[gd_scene load_steps=61 format=3 uid="uid://bculnifb24bap"]
 
 [ext_resource type="Texture2D" uid="uid://cq5u2dluyl3m" path="res://sprites/adventurer/die/adventurer-knock-dwn-00.png" id="1_5s4d2"]
 [ext_resource type="Script" path="res://adventurer.gd" id="1_twgbt"]
@@ -51,6 +51,7 @@
 [ext_resource type="Texture2D" uid="uid://dlt2uoru5nakt" path="res://sprites/adventurer/run-wall/adventurer-wall-run-05.png" id="35_ijah4"]
 [ext_resource type="AudioStream" uid="uid://cnhjdmf82emc4" path="res://Music/Hit/sfx_wpn_punch3.wav" id="50_0cqu2"]
 [ext_resource type="AudioStream" uid="uid://cnywyy63imc7o" path="res://Music/Hit/sfx_damage_hit8.wav" id="51_7plbk"]
+[ext_resource type="AudioStream" uid="uid://d2lu8j4ctx4ul" path="res://Music/Moves/sfx_movement_jump1.wav" id="52_km84e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwadf"]
 size = Vector2(30, 55)
@@ -345,18 +346,13 @@ scale = Vector2(1.71854, 2.22889)
 sprite_frames = SubResource("SpriteFrames_puj4f")
 animation = &"air_attack_1"
 
-[node name="Camera2D" type="Camera2D" parent="CollisionShape2D/AnimatedSprite2D"]
-position = Vector2(-0.774476, 3.03596)
-limit_left = 0
-limit_top = 0
-limit_right = 5190
-limit_bottom = 650
-editor_draw_limits = true
-
 [node name="hit" type="AudioStreamPlayer2D" parent="CollisionShape2D/AnimatedSprite2D"]
 stream = ExtResource("50_0cqu2")
 
 [node name="air_hit" type="AudioStreamPlayer2D" parent="CollisionShape2D/AnimatedSprite2D"]
 stream = ExtResource("51_7plbk")
+
+[node name="jump" type="AudioStreamPlayer2D" parent="CollisionShape2D/AnimatedSprite2D"]
+stream = ExtResource("52_km84e")
 
 [connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -116,9 +116,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vjl30")
 }],
-"loop": true,
+"loop": false,
 "name": &"mushroom_attack",
-"speed": 5.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,

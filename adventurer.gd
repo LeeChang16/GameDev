@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name adventurer
 
+signal healthChanged
+signal collectShard
 #commnet  
 var SPEED = 300.0
 var JUMP_VELOCITY = -580.0
@@ -19,11 +21,16 @@ var new_game=false;
 #To give priority to the current animation and pause other animation
 var animation_play = true
 
+#Shard Bar
+@export var collected = 0
+@export var maxShard = 6
+@onready var currentShard: int = collected
+
 #Health Bar
 @export var maxHealth = 100
 @onready var currentHealth: int = maxHealth
 
-signal healthChanged
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -31,6 +38,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #audio_effects
 var hit
 var air_hit
+var jump_audio
 
 @onready var anim= get_node("CollisionShape2D/AnimatedSprite2D")
 func _ready():	
@@ -39,6 +47,7 @@ func _ready():
 		
 	hit = get_node("CollisionShape2D/AnimatedSprite2D/hit")
 	air_hit = get_node("CollisionShape2D/AnimatedSprite2D/air_hit")
+	jump_audio = get_node("CollisionShape2D/AnimatedSprite2D/jump")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -123,10 +132,13 @@ func jump_anim(delta):
 	
 func jump():
 	anim.play("jump_up")
+	jump_audio.play()
 	velocity.y = JUMP_VELOCITY
 	animation_locked=true
+	
 func double_jump():
 	anim.play("jump_double")
+	jump_audio.play()
 	velocity.y = JUMP_VELOCITY*0.6
 	has_double_jump=true
 	animation_locked=true
@@ -180,15 +192,26 @@ func deal_damage_to_enemy():
 	pass
 
 
+func collect_shard(amount: int):
+	currentShard +=amount
+	collectShard.emit()
+	
+	#to handle adtional logics
+	if currentShard == maxShard:
+		pass
+
+
+
 # Function to handle the player taking damage
 func take_damage(amount: int):
 	currentHealth -= amount
 	print(currentHealth)
+	healthChanged.emit()
 	# Ensure health doesn't go below zero
-	currentHealth = max(0, currentHealth)
-
+	#currentHealth = max(0, currentHealth)
+	
 	# Emit the healthChanged signal with the updated health values
-	emit_signal("healthChanged", currentHealth, maxHealth)
+	#emit_signal("healthChanged", currentHealth, maxHealth)
 
 	# Add logic to handle player death if needed
 	if currentHealth == 0:

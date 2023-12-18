@@ -60,8 +60,9 @@ func _on_attack_area_body_entered(body):
 	#var adventurer = get_node("/root/Node2D/StaticBody2D/adventurer")  # Adjust the path accordingly
 	if body.name == "adventurer":
 	# Call the take_damage function in the adventurer script
+		animation.play("slime_attack")
 		body.take_damage(damage)
 		
 	# Add logic for playing the attack animation if needed
-	animation.play("slime_attack")
+	
 
