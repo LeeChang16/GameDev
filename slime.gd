@@ -7,7 +7,10 @@ var gravity = 500  # Adjust the gravity strength based on your needs
 
 @onready var animation = $CharacterBody2D/AnimatedSprite2D
 
+#var adventurer = get_node("/root/Node2D/StaticBody2D/adventurer")
+
 const SLIME_DAMAGE_AMOUNT = 10
+var damage: int = SLIME_DAMAGE_AMOUNT
 var is_player_inside = false
 
 func _process(delta):
@@ -51,13 +54,13 @@ func _on_area_2d_body_exited(body):
 		is_player_inside = false
 
 
-func _on_attack_hero_body_entered(body):
+func _on_attack_area_body_entered(body):
 	
 	# Get a reference to the adventurer node
-	var adventurer = get_node("/root/Node2D/StaticBody2D/adventurer")  # Adjust the path accordingly
-		
+	#var adventurer = get_node("/root/Node2D/StaticBody2D/adventurer")  # Adjust the path accordingly
+	if body.name == "adventurer":
 	# Call the take_damage function in the adventurer script
-	adventurer.take_damage(SLIME_DAMAGE_AMOUNT)
+		body.take_damage(damage)
 		
 	# Add logic for playing the attack animation if needed
 	animation.play("slime_attack")

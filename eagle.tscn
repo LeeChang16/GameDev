@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://bs66gprvhoc40"]
+
+[ext_resource type="Script" path="res://eagle.gd" id="1_rw4jp"]
+[ext_resource type="Texture2D" uid="uid://bygemyyhcob28" path="res://sprites/Enemy_other/eagle-attack.png" id="1_wmxsr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m3jwc"]
+radius = 33.0606
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sml6q"]
+atlas = ExtResource("1_wmxsr")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_124v7"]
+atlas = ExtResource("1_wmxsr")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkp7k"]
+atlas = ExtResource("1_wmxsr")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18whc"]
+atlas = ExtResource("1_wmxsr")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_arfk1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sml6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_124v7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkp7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18whc")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(0, 2)
+script = ExtResource("1_rw4jp")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(-2, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_m3jwc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/CollisionShape2D"]
+position = Vector2(2, 1.00001)
+scale = Vector2(1.925, 1.9878)
+sprite_frames = SubResource("SpriteFrames_arfk1")
+animation = &"fly"

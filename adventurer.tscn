@@ -1,14 +1,26 @@
-[gd_scene load_steps=46 format=3 uid="uid://bculnifb24bap"]
+[gd_scene load_steps=60 format=3 uid="uid://bculnifb24bap"]
 
 [ext_resource type="Texture2D" uid="uid://cq5u2dluyl3m" path="res://sprites/adventurer/die/adventurer-knock-dwn-00.png" id="1_5s4d2"]
 [ext_resource type="Script" path="res://adventurer.gd" id="1_twgbt"]
+[ext_resource type="Texture2D" uid="uid://bdcllf7mosqen" path="res://sprites/adventurer/power/power-air_attack1/adventurer-air-attack1-00.png" id="2_mfhx6"]
+[ext_resource type="Texture2D" uid="uid://b8ulirs6l0q3n" path="res://sprites/adventurer/power/power-attack1/adventurer-attack1-00.png" id="2_pi405"]
 [ext_resource type="Texture2D" uid="uid://uoymq7w3sts5" path="res://sprites/adventurer/die/adventurer-knock-dwn-01.png" id="2_pqtvd"]
 [ext_resource type="Texture2D" uid="uid://debtwc41qshlp" path="res://sprites/adventurer/die/adventurer-knock-dwn-02.png" id="3_b5cjg"]
+[ext_resource type="Texture2D" uid="uid://bmutm8pyt4lrf" path="res://sprites/adventurer/power/power-air_attack1/adventurer-air-attack1-01.png" id="3_h64od"]
+[ext_resource type="Texture2D" uid="uid://4r8gy7nt7xi7" path="res://sprites/adventurer/power/power-attack1/adventurer-attack1-01.png" id="3_ria2f"]
+[ext_resource type="Texture2D" uid="uid://galdj8ywyql5" path="res://sprites/adventurer/power/power-attack1/adventurer-attack1-02.png" id="4_0o2kq"]
 [ext_resource type="Texture2D" uid="uid://c1fdegkrrhhgt" path="res://sprites/adventurer/die/adventurer-knock-dwn-03.png" id="4_m4h7t"]
+[ext_resource type="Texture2D" uid="uid://ckhnii32gfqws" path="res://sprites/adventurer/power/power-air_attack1/adventurer-air-attack1-02.png" id="4_qimu5"]
 [ext_resource type="Texture2D" uid="uid://csglijny5dv7l" path="res://sprites/adventurer/die/adventurer-knock-dwn-04.png" id="5_jjcps"]
+[ext_resource type="Texture2D" uid="uid://cqo4qbv7ejugs" path="res://sprites/adventurer/power/power-attack1/adventurer-attack1-03.png" id="5_ujo0c"]
+[ext_resource type="Texture2D" uid="uid://bj1dqx5nqvtgt" path="res://sprites/adventurer/power/power-air_attack1/adventurer-air-attack1-03.png" id="5_xwnil"]
+[ext_resource type="Texture2D" uid="uid://t3gkjf7wuqga" path="res://sprites/adventurer/power/power-air_attack2/adventurer-air-attack2-00.png" id="6_g6mfy"]
 [ext_resource type="Texture2D" uid="uid://xq684vvxxnrw" path="res://sprites/adventurer/die/adventurer-knock-dwn-05.png" id="6_j44wy"]
+[ext_resource type="Texture2D" uid="uid://okn3vg7y8djx" path="res://sprites/adventurer/power/power-attack1/adventurer-attack1-04.png" id="6_x10kl"]
 [ext_resource type="Texture2D" uid="uid://b0mwjq4qbvt4d" path="res://sprites/adventurer/die/adventurer-knock-dwn-06.png" id="7_17sin"]
+[ext_resource type="Texture2D" uid="uid://cegfk0pqvfxsf" path="res://sprites/adventurer/power/power-air_attack2/adventurer-air-attack2-01.png" id="7_umn3x"]
 [ext_resource type="Texture2D" uid="uid://88mk8yhcdjn5" path="res://sprites/adventurer/die-fall/adventurer-fall-00.png" id="8_6tphk"]
+[ext_resource type="Texture2D" uid="uid://dpymg76si5rjq" path="res://sprites/adventurer/power/power-air_attack2/adventurer-air-attack2-02.png" id="8_yifh4"]
 [ext_resource type="Texture2D" uid="uid://bxbmp2culx35q" path="res://sprites/adventurer/die-fall/adventurer-fall-01.png" id="9_15wjm"]
 [ext_resource type="Texture2D" uid="uid://c3nv06rl13j18" path="res://sprites/adventurer/idle/adventurer-idle-00.png" id="10_lk2c4"]
 [ext_resource type="Texture2D" uid="uid://be60vmqokjuxl" path="res://sprites/adventurer/idle/adventurer-idle-01.png" id="11_pgfo3"]
@@ -37,6 +49,8 @@
 [ext_resource type="Texture2D" uid="uid://dp2w16ia0oe5f" path="res://sprites/adventurer/run-wall/adventurer-wall-run-03.png" id="33_gcjv1"]
 [ext_resource type="Texture2D" uid="uid://cm8ut64rvx3i4" path="res://sprites/adventurer/run-wall/adventurer-wall-run-04.png" id="34_yjl5h"]
 [ext_resource type="Texture2D" uid="uid://dlt2uoru5nakt" path="res://sprites/adventurer/run-wall/adventurer-wall-run-05.png" id="35_ijah4"]
+[ext_resource type="AudioStream" uid="uid://cnhjdmf82emc4" path="res://Music/Hit/sfx_wpn_punch3.wav" id="50_0cqu2"]
+[ext_resource type="AudioStream" uid="uid://cnywyy63imc7o" path="res://Music/Hit/sfx_damage_hit8.wav" id="51_7plbk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwadf"]
 size = Vector2(30, 55)
@@ -67,6 +81,57 @@ region = Rect2(100, 111, 50, 37)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_puj4f"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mfhx6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h64od")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qimu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xwnil")
+}],
+"loop": false,
+"name": &"air_attack_1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_g6mfy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_umn3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yifh4")
+}],
+"loop": true,
+"name": &"air_attack_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pi405")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ria2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0o2kq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ujo0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_x10kl")
+}],
+"loop": false,
+"name": &"attack_1",
+"speed": 18.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_5s4d2")
@@ -162,7 +227,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_br7dq")
 }],
-"loop": false,
+"loop": true,
 "name": &"jump_double",
 "speed": 10.0
 }, {
@@ -238,9 +303,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("29_mql5t")
 }],
-"loop": true,
+"loop": false,
 "name": &"run_punch",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -278,7 +343,7 @@ shape = SubResource("RectangleShape2D_mwadf")
 position = Vector2(2, -11.5)
 scale = Vector2(1.71854, 2.22889)
 sprite_frames = SubResource("SpriteFrames_puj4f")
-animation = &"die"
+animation = &"air_attack_1"
 
 [node name="Camera2D" type="Camera2D" parent="CollisionShape2D/AnimatedSprite2D"]
 position = Vector2(-0.774476, 3.03596)
@@ -287,5 +352,11 @@ limit_top = 0
 limit_right = 5190
 limit_bottom = 650
 editor_draw_limits = true
+
+[node name="hit" type="AudioStreamPlayer2D" parent="CollisionShape2D/AnimatedSprite2D"]
+stream = ExtResource("50_0cqu2")
+
+[node name="air_hit" type="AudioStreamPlayer2D" parent="CollisionShape2D/AnimatedSprite2D"]
+stream = ExtResource("51_7plbk")
 
 [connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://dq65jq1bq012b"]
+
+[ext_resource type="Script" path="res://Node2D.gd" id="1_3leyn"]
+[ext_resource type="Texture2D" uid="uid://dol3sjinx1qdl" path="res://sprites/Enemy_other/oposum.png" id="2_2jvw2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mp22g"]
+radius = 16.1245
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1h6k"]
+atlas = ExtResource("2_2jvw2")
+region = Rect2(0, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqyq8"]
+atlas = ExtResource("2_2jvw2")
+region = Rect2(36, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cv5ek"]
+atlas = ExtResource("2_2jvw2")
+region = Rect2(72, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as1u2"]
+atlas = ExtResource("2_2jvw2")
+region = Rect2(108, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4t3o"]
+atlas = ExtResource("2_2jvw2")
+region = Rect2(144, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvf8k"]
+atlas = ExtResource("2_2jvw2")
+region = Rect2(180, 0, 36, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nsqew"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1h6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqyq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cv5ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as1u2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4t3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvf8k")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_3leyn")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_mp22g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/CollisionShape2D"]
+position = Vector2(3, -7)
+scale = Vector2(1.54167, 1.625)
+sprite_frames = SubResource("SpriteFrames_nsqew")
+animation = &"run"

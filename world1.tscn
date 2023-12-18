@@ -14,10 +14,10 @@
 [ext_resource type="AudioStream" uid="uid://51xvgy1phoru" path="res://cave.ogg" id="11_xcmfs"]
 [ext_resource type="Texture2D" uid="uid://cogcarw8r16a4" path="res://Assets/bar-progress.png" id="13_30bwk"]
 [ext_resource type="Texture2D" uid="uid://b7d3skoarbek1" path="res://Assets/bar-over.png" id="14_l03kd"]
+[ext_resource type="PackedScene" uid="uid://bs66gprvhoc40" path="res://eagle.tscn" id="15_kp3qo"]
 [ext_resource type="Texture2D" uid="uid://d2entpoywj43g" path="res://Assets/lifebar_heart_extension.png" id="16_0a1wq"]
 [ext_resource type="Texture2D" uid="uid://pxj4gr3u6dxi" path="res://Assets/shard.png" id="16_6k6a4"]
-[ext_resource type="Texture2D" uid="uid://dn7acujwb26wc" path="res://Assets/circle-over.png" id="17_i651y"]
-[ext_resource type="Texture2D" uid="uid://du3sm0w2lpkni" path="res://Assets/shard-progress.png" id="18_toesx"]
+[ext_resource type="Texture2D" uid="uid://dq3odbnmbn8fw" path="res://Assets/greenshard-progress.png" id="17_7iu3s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1f5l7"]
 texture = ExtResource("3_5ga0e")
@@ -1832,11 +1832,6 @@ rotation = 0.000397141
 scale = Vector2(-0.97713, 0.988893)
 texture = ExtResource("2_h1gq0")
 
-[node name="portal" parent="StaticBody2D/TextureRect7" instance=ExtResource("3_5fh5e")]
-position = Vector2(-1670.39, 466.534)
-rotation = -3.1412
-scale = Vector2(1.0234, -1.01123)
-
 [node name="TextureRect6" type="TextureRect" parent="StaticBody2D"]
 offset_left = 3442.0
 offset_top = -1.0
@@ -1864,9 +1859,6 @@ shape = SubResource("RectangleShape2D_ejnbo")
 [node name="CollisionShape2D18" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-21, 300)
 shape = SubResource("RectangleShape2D_wy4uf")
-
-[node name="Node2D" parent="StaticBody2D/CollisionShape2D18" instance=ExtResource("7_4t0xu")]
-position = Vector2(2801, 25)
 
 [node name="CollisionShape2D19" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(5212, 295)
@@ -1937,23 +1929,42 @@ shape = SubResource("RectangleShape2D_vfokl")
 position = Vector2(1764.45, 539)
 shape = SubResource("RectangleShape2D_46xq7")
 
-[node name="chest" parent="StaticBody2D" instance=ExtResource("8_kp1iw")]
+[node name="chest1" parent="StaticBody2D" instance=ExtResource("8_kp1iw")]
 position = Vector2(1953, 502)
+
+[node name="chest2" parent="StaticBody2D" instance=ExtResource("8_kp1iw")]
+position = Vector2(3442, 333)
 
 [node name="adventurer" parent="StaticBody2D" instance=ExtResource("6_2yqbh")]
 position = Vector2(47, 307)
 
-[node name="slime" parent="StaticBody2D" instance=ExtResource("7_dt2ft")]
+[node name="slime1" parent="StaticBody2D" instance=ExtResource("7_dt2ft")]
 position = Vector2(453, 331)
 
 [node name="slime2" parent="StaticBody2D" instance=ExtResource("7_dt2ft")]
-position = Vector2(1892, 498)
+position = Vector2(1812, 502)
 
 [node name="slime3" parent="StaticBody2D" instance=ExtResource("7_dt2ft")]
 position = Vector2(3223, 327)
 
 [node name="slime4" parent="StaticBody2D" instance=ExtResource("7_dt2ft")]
 position = Vector2(3895, 325)
+
+[node name="Hawk1" parent="StaticBody2D" instance=ExtResource("15_kp3qo")]
+position = Vector2(1099, 239)
+
+[node name="Hawk3" parent="StaticBody2D" instance=ExtResource("15_kp3qo")]
+position = Vector2(4565, 240)
+
+[node name="Hawk2" parent="StaticBody2D" instance=ExtResource("15_kp3qo")]
+position = Vector2(2127, 391)
+
+[node name="Frog1" parent="StaticBody2D" instance=ExtResource("7_4t0xu")]
+position = Vector2(2782, 327)
+
+[node name="Frog2" parent="StaticBody2D" instance=ExtResource("7_4t0xu")]
+position = Vector2(5078, 503)
+scale = Vector2(1, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="StaticBody2D"]
 stream = ExtResource("11_xcmfs")
@@ -1989,6 +2000,7 @@ texture = ExtResource("16_0a1wq")
 expand_mode = 1
 
 [node name="Shard" type="TextureRect" parent="StaticBody2D/CanvasLayer"]
+visible = false
 offset_left = 40.0
 offset_top = 63.0
 offset_right = 66.0
@@ -1997,10 +2009,14 @@ texture = ExtResource("16_6k6a4")
 expand_mode = 1
 
 [node name="ShardBar" type="TextureProgressBar" parent="StaticBody2D/CanvasLayer"]
-offset_left = 83.0
-offset_top = 76.0
-offset_right = 184.0
-offset_bottom = 96.0
+offset_left = 76.0
+offset_top = 52.0
+offset_right = 218.0
+offset_bottom = 80.0
+value = 100.0
 nine_patch_stretch = true
-texture_over = ExtResource("17_i651y")
-texture_progress = ExtResource("18_toesx")
+texture_progress = ExtResource("17_7iu3s")
+
+[node name="portal" parent="StaticBody2D" instance=ExtResource("3_5fh5e")]
+position = Vector2(5154, 437)
+scale = Vector2(0.999995, 0.999998)
