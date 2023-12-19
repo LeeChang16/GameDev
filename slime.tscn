@@ -114,33 +114,31 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ngm6n"]
-radius = 208.195
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_snfb8"]
 radius = 22.0
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ngm6n"]
+radius = 208.195
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_bjxvw")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2, -11)
 scale = Vector2(1.25, 1.82)
 sprite_frames = SubResource("SpriteFrames_xncx6")
 animation = &"slime_attack"
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_ngm6n")
 
 [node name="attack_area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
 shape = SubResource("CircleShape2D_snfb8")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ngm6n")
+
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]

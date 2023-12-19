@@ -1,11 +1,18 @@
 extends Node2D
 
+class_name slime1 
+
+signal healthChanged
+
 var speed = 200
 var direction = Vector2.ZERO  # Initially set to zero for idle state
 # var follow_range = 350  # Adjust the range based on your needs
 var gravity = 500  # Adjust the gravity strength based on your needs
 
-@onready var animation = $CharacterBody2D/AnimatedSprite2D
+#@export var maxHealth = 50
+#@onready var currentHealth: int = maxHealth
+
+@onready var animation = $AnimatedSprite2D
 
 #var adventurer = get_node("/root/Node2D/StaticBody2D/adventurer")
 
@@ -14,6 +21,7 @@ var damage: int = SLIME_DAMAGE_AMOUNT
 var is_player_inside = false
 
 func _process(delta):
+	#print(currentHealth)
 	# Check if the adventurer node is inside the slime's detection area
 	if is_player_inside:
 		# Get a reference to the adventurer node
@@ -65,4 +73,20 @@ func _on_attack_area_body_entered(body):
 		
 	# Add logic for playing the attack animation if needed
 	
+func take_damage(amount: int):
+	Globals.slime1_currentHealth -= amount
+	print(Globals.slime1_currentHealth)
+	healthChanged.emit()
+	# Ensure health doesn't go below zero
+	#currentHealth = max(0, currentHealth)
+	
+	# Emit the healthChanged signal with the updated health values
+	#emit_signal("healthChanged", currentHealth, maxHealth)
 
+	# Add logic to handle player death if needed
+	if Globals.slime1_currentHealth == 0:
+		on_enemy_death()
+		
+func on_enemy_death():
+	# For example, reload the scene or show a game over screen
+	pass

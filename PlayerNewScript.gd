@@ -22,13 +22,13 @@ var new_game=false;
 var animation_play = true
 
 #Shard Bar
-@export var collected = 0
-@export var maxShard = 6
-@onready var currentShard: int = collected
+#@export var collected = 0
+#@export var maxShard = 6
+#@onready var currentShard: int = collected
 
 #Health Bar
-@export var maxHealth = 100
-@onready var currentHealth: int = maxHealth
+#@export var maxHealth = 100
+#@onready var currentHealth: int = maxHealth
 
 
 
@@ -49,7 +49,7 @@ func _ready():
 	air_hit = get_node("CollisionShape2D/AnimatedSprite2D/air_hit")
 	jump_audio = get_node("CollisionShape2D/AnimatedSprite2D/jump")
 
-func _physics_process(delta):
+func _process(delta):
 	# Add the gravity.
 #	print("x: ",prevX)
 #	print("y: ",prevY)
@@ -193,19 +193,19 @@ func deal_damage_to_enemy():
 
 
 func collect_shard(amount: int):
-	currentShard +=amount
+	Globals.currentShard +=amount
 	collectShard.emit()
 	
 	#to handle adtional logics
-	if currentShard == maxShard:
+	if Globals.currentShard == Globals.maxShard:
 		pass
 
 
 
 # Function to handle the player taking damage
 func take_damage(amount: int):
-	currentHealth -= amount
-	print(currentHealth)
+	Globals.currentHealth -= amount
+	print(Globals.currentHealth)
 	healthChanged.emit()
 	# Ensure health doesn't go below zero
 	#currentHealth = max(0, currentHealth)
@@ -214,7 +214,7 @@ func take_damage(amount: int):
 	#emit_signal("healthChanged", currentHealth, maxHealth)
 
 	# Add logic to handle player death if needed
-	if currentHealth == 0:
+	if Globals.currentHealth == 0:
 		on_player_death()
 
 
@@ -250,3 +250,11 @@ func _on_animated_sprite_2d_animation_finished():
 		animation_play=true
 	if(anim.animation=="air_attack_1"):
 		animation_play=true
+
+
+func _on_attack_range_body_entered(body):
+	pass # Replace with function body.
+
+
+func _on_attack_range_body_exited(body):
+	pass # Replace with function body.
