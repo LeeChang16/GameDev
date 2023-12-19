@@ -15,4 +15,4 @@ func _ready():
 func update():
 	#value 
 	#value1 = player.collectShard / player.maxShard
-	value = player.currentShard * 100 / player.maxShard
+	value = Globals.currentShard * 100 / Globals.maxShard

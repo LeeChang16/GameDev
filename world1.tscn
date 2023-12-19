@@ -1970,7 +1970,6 @@ position = Vector2(2782, 327)
 
 [node name="Frog2" parent="StaticBody2D" instance=ExtResource("7_4t0xu")]
 position = Vector2(5078, 503)
-scale = Vector2(1, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="StaticBody2D"]
 stream = ExtResource("11_xcmfs")

@@ -22,13 +22,13 @@ var new_game=false;
 var animation_play = true
 
 #Shard Bar
-@export var collected = 0
-@export var maxShard = 6
-@onready var currentShard: int = collected
+#@export var collected = 0
+#@export var maxShard = 6
+#@onready var currentShard: int = collected
 
 #Health Bar
-@export var maxHealth = 100
-@onready var currentHealth: int = maxHealth
+#@export var maxHealth = 100
+#@onready var currentHealth: int = maxHealth
 
 
 
@@ -193,19 +193,19 @@ func deal_damage_to_enemy():
 
 
 func collect_shard(amount: int):
-	currentShard +=amount
+	Globals.currentShard +=amount
 	collectShard.emit()
 	
 	#to handle adtional logics
-	if currentShard == maxShard:
+	if Globals.currentShard == Globals.maxShard:
 		pass
 
 
 
 # Function to handle the player taking damage
 func take_damage(amount: int):
-	currentHealth -= amount
-	print(currentHealth)
+	Globals.currentHealth -= amount
+	print(Globals.currentHealth)
 	healthChanged.emit()
 	# Ensure health doesn't go below zero
 	#currentHealth = max(0, currentHealth)
@@ -214,7 +214,7 @@ func take_damage(amount: int):
 	#emit_signal("healthChanged", currentHealth, maxHealth)
 
 	# Add logic to handle player death if needed
-	if currentHealth == 0:
+	if Globals.currentHealth == 0:
 		on_player_death()
 
 
