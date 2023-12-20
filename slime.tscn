@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbk6pi2f065xw"]
+[gd_scene load_steps=27 format=3 uid="uid://dbk6pi2f065xw"]
 
 [ext_resource type="Script" path="res://slime.gd" id="1_bjxvw"]
 [ext_resource type="Texture2D" uid="uid://gqlj4g8ynmn2" path="res://sprites/Slime/Slime Attack/slime-attack-0.png" id="1_xx11p"]
@@ -58,7 +58,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_r4trx")
 }],
-"loop": true,
+"loop": false,
 "name": &"slime_die",
 "speed": 5.0
 }, {
@@ -120,6 +120,9 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ngm6n"]
 radius = 208.195
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ybmoe"]
+radius = 22.0227
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_bjxvw")
 
@@ -127,7 +130,7 @@ script = ExtResource("1_bjxvw")
 position = Vector2(2, -11)
 scale = Vector2(1.25, 1.82)
 sprite_frames = SubResource("SpriteFrames_xncx6")
-animation = &"slime_attack"
+animation = &"slime_die"
 
 [node name="attack_area" type="Area2D" parent="."]
 
@@ -138,6 +141,9 @@ shape = SubResource("CircleShape2D_snfb8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_ngm6n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ybmoe")
 
 [connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

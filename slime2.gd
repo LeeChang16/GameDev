@@ -1,8 +1,8 @@
 extends Node2D
 
-class_name slime1 
+class_name slime2 
 
-signal slime_healthChanged
+signal slime2_healthChanged
 
 var speed = 200
 var direction = Vector2.ZERO  # Initially set to zero for idle state
@@ -24,7 +24,7 @@ var has_died = false
 
 func _process(delta):
 	#print(currentHealth)
-	if Globals.slime1_currentHealth <= 0:
+	if Globals.slime2_currentHealth <= 0:
 		is_alive = false
 	
 	if is_alive:
@@ -87,9 +87,9 @@ func _on_attack_area_body_entered(body):
 	# Add logic for playing the attack animation if needed
 	
 func enemy_take_damage(amount: int):
-	Globals.slime1_currentHealth -= amount
-	slime_healthChanged.emit()
-	print(Globals.slime1_currentHealth)
+	Globals.slime2_currentHealth -= amount
+	slime2_healthChanged.emit()
+	print(Globals.slime2_currentHealth)
 	# Ensure health doesn't go below zero
 	#currentHealth = max(0, currentHealth)
 	
@@ -97,7 +97,7 @@ func enemy_take_damage(amount: int):
 	#emit_signal("healthChanged", currentHealth, maxHealth)
 
 	# Add logic to handle player death if needed
-	if Globals.slime1_currentHealth <= 0:
+	if Globals.slime2_currentHealth <= 0:
 		on_enemy_death()
 		
 func on_enemy_death():

@@ -40,57 +40,107 @@ var hit
 var air_hit
 var jump_audio
 
+var is_alive = true
+var die_locked = false
+var has_attacked = false
+var enemy_inside = false
+
+var slime1
+var enemy1 = false
+
+var slime2
+var enemy2 = false
+
+var slime3
+var enemy3 = false
+
+var slime4
+var enemy4 = false
+
+const PLAYER_DAMAGE_AMOUNT = 20
+var damage: int = PLAYER_DAMAGE_AMOUNT
+
 @onready var anim= get_node("CollisionShape2D/AnimatedSprite2D")
 func _ready():	
-	if animation_play:
-		anim.play('idle')
-		
+	
 	hit = get_node("CollisionShape2D/AnimatedSprite2D/hit")
 	air_hit = get_node("CollisionShape2D/AnimatedSprite2D/air_hit")
 	jump_audio = get_node("CollisionShape2D/AnimatedSprite2D/jump")
-
-func _process(delta):
-	# Add the gravity.
-#	print("x: ",prevX)
-#	print("y: ",prevY)
 	
-	if not is_on_floor():
-		velocity.y += gravity * delta
-		was_in_air=true
+	slime1 = get_node("/root/Node2D/StaticBody2D/slime1")
+	slime2 = get_node("/root/Node2D/StaticBody2D/slime2")
+	slime3 = get_node("/root/Node2D/StaticBody2D/slime3") 
+	slime4 = get_node("/root/Node2D/StaticBody2D/slime4")
+	
+	if animation_play and is_alive:
+		anim.play('idle')
+	else:
+		anim.play("die")
+		
+func _process(delta):
+
+	if Globals.currentHealth <= 0:
+		is_alive = false
+
+	if is_alive:
+		if not is_on_floor():
+			velocity.y += gravity * delta
+			was_in_air=true
+		
+		else:
+			has_double_jump=false
+			if was_in_air:
+				land()	
+				was_in_air=false;
+	
+		if Input.is_action_just_pressed("attack"):
+			attack()
+		
+	
+		if Input.is_action_just_pressed("ui_accept"):
+		#double jump
+			if is_on_floor():
+				jump()
+			elif not has_double_jump:
+				double_jump()
+			
+			
+		direction = Input.get_axis("ui_left", "ui_right")		
+		#animation for jump
+		if not is_on_floor():
+			jump_anim(delta)
+#			jump_anim(delta)	
+		prevX= position.x
+		prevY=position.y
+		
+		move_and_slide()
+		update_facing_sprite()
+		update_animation()
+		
+		if enemy_inside and has_attacked:
+			if enemy1:
+				slime1.enemy_take_damage(damage)
+				has_attacked = false
+			if enemy2:
+				slime2.enemy_take_damage(damage)
+				has_attacked = false
+			if enemy3:
+				slime3.enemy_take_damage(damage)
+				has_attacked = false
+			if enemy4:
+				slime4.enemy_take_damage(damage)
+				has_attacked = false
+		else:
+			has_attacked=false
 		
 	else:
-		has_double_jump=false
-		if was_in_air:
-			land()	
-			was_in_air=false;
+		if not die_locked:
+			anim.play("die")
+			die_locked = true
 	
-	if Input.is_action_just_pressed("attack"):
-		attack()
-		
 	
-	if Input.is_action_just_pressed("ui_accept"):
-		#double jump
-		if is_on_floor():
-			jump()
-		elif not has_double_jump:
-			double_jump()
-			
-			
-	direction = Input.get_axis("ui_left", "ui_right")		
-	#animation for jump
-	if not is_on_floor():
-		jump_anim(delta)
-#		jump_anim(delta)	
-	prevX= position.x
-	prevY=position.y
-
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	move_and_slide()
-	update_facing_sprite()
-	update_animation()
-
+	
+	
 	
 func update_animation():
 	if not animation_locked:
@@ -163,12 +213,13 @@ func attack():
 		animation_play = false
 		
 		anim.play("attack_1")
+		has_attacked = true
 		hit.play()
 		
 		print("Land_Attack")
 		# Add logic to deal damage to enemies or perform other attack actions
 		# For simplicity, let's assume dealing damage to an enemy (you should replace this logic)
-		deal_damage_to_enemy()
+		
 	else:
 		
 		animation_play = false
@@ -186,9 +237,6 @@ func attack():
 
 
 func deal_damage_to_enemy():
-	# Add logic to deal damage to enemies or perform other attack actions
-	# For simplicity, let's emit a signal for now
-	#emit_signal("playerAttacked", damage_amount)
 	pass
 
 
@@ -253,8 +301,31 @@ func _on_animated_sprite_2d_animation_finished():
 
 
 func _on_attack_range_body_entered(body):
-	pass # Replace with function body.
-
-
+	if body.name == "slime1":
+		enemy_inside = true
+		enemy1 = true
+	elif body.name == "slime2":
+		enemy_inside = true
+		enemy2 = true
+	elif body.name == "slime3":
+		enemy_inside = true
+		enemy3 = true
+	elif body.name == "slime4":
+		enemy_inside = true
+		enemy4 = true
+		
 func _on_attack_range_body_exited(body):
-	pass # Replace with function body.
+	if body.name == "slime1":
+		enemy_inside = false
+	
+	elif body.name == "slime2":
+		enemy_inside = false
+		
+	elif body.name == "slime3":
+		enemy_inside = false
+
+	elif body.name == "slime4":
+		enemy_inside = false
+
+	
+	

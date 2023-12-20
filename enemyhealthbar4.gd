@@ -2,17 +2,17 @@ extends TextureProgressBar
 
 #initialize player here
 
-@export var enemy: slime1
+@export var enemy: slime4
 #var adventurer 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	enemy.slime_healthChanged.connect(update)
+	enemy.slime4_healthChanged.connect(update)
 	update()
 	
 	
 func update():
-	value = Globals.slime1_currentHealth * 100 / Globals.slime1_maxHealth
-	print(Globals.slime1_currentHealth)
+	value = Globals.slime4_currentHealth * 100 / Globals.slime4_maxHealth
+	print(Globals.slime4_currentHealth)
 	print(value)
